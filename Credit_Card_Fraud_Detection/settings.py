@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'CC_Fraud_app',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

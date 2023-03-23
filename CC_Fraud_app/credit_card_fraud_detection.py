@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix,classification_repo
 from sklearn.metrics import recall_score, f1_score, precision_score
 from sklearn.svm import SVC
 import matplotlib.pyplot as plt
-import plotly.graph_objects as go
+# import plotly.graph_objects as go
 from random import uniform
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
