@@ -16,7 +16,7 @@ def getdata(request):
 	CC = CCD_Fraud_Detection()
 	value = CC.LogisticRegression_for_cc_fraud(file_name)
 	
-	weather={
+	Accuracy={
 		"score":value
 				}
-	return Response(weather)
+	return Response(Accuracy)
