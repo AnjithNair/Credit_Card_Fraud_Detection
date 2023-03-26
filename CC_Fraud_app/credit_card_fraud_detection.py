@@ -13,12 +13,8 @@ from sklearn.preprocessing import StandardScaler
 # Using Different Models For CCD Fraud Detection
 class CCD_Fraud_Detection:
 
-    def __init__(self):
-        self.filepath = input("Enter the filepath: ")
-
-
     # Logistic Regression Model
-    def LogisticRegression_for_cc_fraud(self):
+    def LogisticRegression_for_cc_fraud(self,filepath):
         """Logistic Regression model to predict 
         the Accuracy of a given Supervised Data
         Args: 
@@ -26,7 +22,7 @@ class CCD_Fraud_Detection:
         Return: 
             None
         """
-        data = pd.read_csv(f"{self.filepath}.csv")
+        data = pd.read_csv(f"{filepath}.csv")
         
         legit = data[data.Class == 0]
         fraud = data[data.Class == 1]
@@ -64,7 +60,7 @@ class CCD_Fraud_Detection:
 
 
     # Random Forest Model
-    def random_forest_for_cc_fraud(self):
+    def random_forest_for_cc_fraud(self,filepath):
         """Random Forest Model for predicting fraud transactions in a given dataset
 
         Args:
@@ -73,7 +69,7 @@ class CCD_Fraud_Detection:
         Returns:
             float : Accuracy of the predictions
         """
-        data = pd.read_csv(f"{self.filepath}.csv")
+        data = pd.read_csv(f"{filepath}.csv")
 
         # Spliting the dataset into features and targets
         X = data.drop('Class',axis=1)
@@ -98,7 +94,7 @@ class CCD_Fraud_Detection:
 
 
     # Support Vector Machine(SVM) Model
-    def SVM_for_cc_fraud(self):
+    def SVM_for_cc_fraud(self,filepath):
         """Support Vector Machine(SVM) Model for predicting fraud transaction in a given dataset
 
         Args:
@@ -107,7 +103,7 @@ class CCD_Fraud_Detection:
         Returns:
             float : Accuracy of the predictions
         """
-        data = pd.read_csv(f"{self.filepath}.csv")
+        data = pd.read_csv(f"{filepath}.csv")
 
         legit = data[data.Class == 0]
         fraud = data[data.Class == 1]
@@ -130,13 +126,13 @@ class CCD_Fraud_Detection:
         return training_data_accuracy*100
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
-    # # Creating an instance of the class CCD_Fraud_Detection.
-    CC = CCD_Fraud_Detection()
-    print(CC.LogisticRegression_for_cc_fraud())
-    print(CC.SVM_for_cc_fraud())
-    print(CC.random_forest_for_cc_fraud())
+#     # # Creating an instance of the class CCD_Fraud_Detection.
+#     CC = CCD_Fraud_Detection()
+#     print(CC.LogisticRegression_for_cc_fraud())
+#     print(CC.SVM_for_cc_fraud())
+#     print(CC.random_forest_for_cc_fraud())
     # # Creating a gauge chart using plotly.
     # fig = go.Figure(go.Indicator(
     #     mode = "gauge+number",

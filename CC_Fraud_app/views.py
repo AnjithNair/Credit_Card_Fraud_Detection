@@ -10,13 +10,14 @@ from rest_framework.response import Response
 def getdata(request):
 	data = request.data
 	file_name = data['file_name']
-	{
-"file_name":"creditcard"
-}
+
 	CC = CCD_Fraud_Detection()
-	value = CC.LogisticRegression_for_cc_fraud(file_name)
-	
+	value1 = CC.LogisticRegression_for_cc_fraud(file_name)
+	value3 = CC.SVM_for_cc_fraud(file_name)
+	value2 = CC.random_forest_for_cc_fraud(file_name)
 	Accuracy={
-		"score":value
+		"Accuracy of LogisticRegression": value1,
+		"Accuracy of RandomForest": value2,
+		"Accuracy of SVM Model" : value3
 				}
 	return Response(Accuracy)
