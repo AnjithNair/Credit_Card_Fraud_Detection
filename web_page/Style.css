@@ -1,211 +1,67 @@
 *{
-    margin: 0;
-    padding: 0;
-    font-family: Century Georgia, 'Times New Roman', Times, serif;
-
+  margin: 0;
+  padding: 0;
+  font-family: Century Georgia, 'Times New Roman', Times, serif;
 }
 
 header{
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(card\ image.jpg);
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(card-image.jpg);
+  background-size: cover;
+  background-position: center;
 }
 
-
 .hh {
-  width: 200;
   color: rgb(250, 235, 240);
   text-shadow: rgb(220, 243, 9);
   margin: 60px;
-  outline: silver;
   padding: 8px;
   transition: 3s;
   text-align: center;
   font-size: 60px;
   text-decoration-color: rgb(233, 57, 57);
-
 }
 
-.h {
-  display: flex; /* enable flexbox layout */
-  justify-content: center; /* center the element horizontally */
-  align-items: center; /* center the element vertically */
-  } 
+#dropdown{
+  margin-top: 30px;
+}
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
 
+button {
+  background-color: #a38c97;
+  color: rgb(24, 23, 23);
+  font-size: 40px;
+  padding: 16px 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-left: 20px;
+}
 
-  
-  #ff{
-    display: block;
-    text-align: center;
-    margin: auto;
-    justify-content: center;
-    
+select.h {
+  width: 350px;
+  padding: 18px;
+  font-size: 30px;
+  border: 3px solid #201f1f;
+  border-radius: 5px;
+  box-shadow: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 25 25' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M25.413 12.586L16 22l-9.413-9.414a2 2 0 0 1 2.828-2.828L16 16.172l6.586-6.586a2 2 0 0 1 2.827 2.828z' fill='%231D1D1B'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1px center;
+  background-size: 30px 30px;
+  background-color: #c3c2c5;
+}
+
+option {
+  color: #201f1f;
   }
-
-
- #ss{
-    position: absolute;
-    right: 20%;
-    top: 50%;
-    
-    
-  } 
-
-  button {
-    background-color: #a38c97;
-    color: rgb(24, 23, 23);
-    font-size: 40px;
-    padding: 16px 32px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-  }
-
-
-
-
-
-
-  
-    #dropdown select.h {
-      position:absolute ;
-      
-      left: 30%;
-      top: 50%;
-      width: 350px;
-      padding: 18px;
-      font-size: 30px;
-      border: 3px solid #201f1f;
-      border-radius: 5px;
-      box-shadow: none;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 25 25' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M25.413 12.586L16 22l-9.413-9.414a2 2 0 0 1 2.828-2.828L16 16.172l6.586-6.586a2 2 0 0 1 2.827 2.828z' fill='%231D1D1B'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1px center;
-      background-size: 30px 30px;
-      background-color: #c3c2c5;
-    
-    }
-
-    select:focus-within select{
-      outline:none;
-      display: block;
-
-    } 
-    option {
-      background-color: #529407; /* set background color */
-      color: #e47878; 
-    
-    }
-
-    option:hover {
-      background-color: #854332; /* set hover background color */
-    }
-    
-
-
-
-
-
-
-    
-    
-    
-    
-  
-
-    
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* .hh {
-        width: 200;
-        color: rgb(250, 235, 240);
-        text-shadow: rgb(220, 243, 9);
-        margin: 60px;
-        outline: silver;
-        padding: 8px;
-        transition: 3s;
-        text-align: center;
-        font-size: 60px;
-        text-decoration-color: rgb(233, 57, 57);
-
-     } */
-
-     /* .h {
-        display: flex; /* enable flexbox layout */
-        /* justify-content: center; /* center the element horizontally */
-        /* align-items: center; /* center the element vertically */
-        
-      
-      /* #dropdown{
-        border:none;
-        padding: 10px 20px;
-        border-radius:5px;
-        top: 50%;
-        left: 40%;
-        position: absolute;
-        display: block;
-        color: black;
-        
-       } 
-      
-      select:focus-within select{
-        outline:none;
-        display: block;
-
-      } 
-      option {
-        background-color: #bdb2f0; /* set background color */
-        /* color: #333; 
-      
-      }
-
-      option:hover {
-        background-color: #455eeb; /* set hover background color 
-      }*/
-    
-      
-      
