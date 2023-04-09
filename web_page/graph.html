@@ -10,22 +10,47 @@
       <h1 class="h">ACCURACY GRAPH FOR THE ALGORITHMS USED</h1>
 
       <div class="progress-bar">
-        <div class="bar" style="--width: 46%;"></div>
-        <div class="label">46%</div>
+        <div class="bar" style="--width: var(--random-forest-percentage, 0%);"></div>
+        <div class="label" id="random-forest-label">0%</div>
       </div>
       <p><b>Random forest</b></p>
 
       <div class="progress-bar">
-        <div class="bar" style="--width: 100%;"></div>
-        <div class="label">100%</div>
+        <div class="bar" style="--width: var(--decision-tree-percentage, 0%);"></div>
+        <div class="label" id="decision-tree-label">0%</div>
       </div>
       <p><b>Decision tree</b></p>
 
       <div class="progress-bar">
-        <div class="bar" style="--width: 50%;"></div>
-        <div class="label">50%</div>
+        <div class="bar" style="--width: var(--svm-percentage, 0%);"></div>
+        <div class="label" id="svm-label">0%</div>
       </div>
       <p><b>Support vector machine</b></p>
     </header>
+
+    <script>
+      // Get the labels and set their initial values
+      const rfLabel = document.getElementById('random-forest-label');
+      rfLabel.textContent = rfLabel.previousElementSibling.style.getPropertyValue('--width');
+
+      const dtLabel = document.getElementById('decision-tree-label');
+      dtLabel.textContent = dtLabel.previousElementSibling.style.getPropertyValue('--width');
+
+      const svmLabel = document.getElementById('svm-label');
+      svmLabel.textContent = svmLabel.previousElementSibling.style.getPropertyValue('--width');
+
+      // Update the percentages and labels
+      const updateGraph = (rfPercentage, dtPercentage, svmPercentage) => {
+        document.documentElement.style.setProperty('--random-forest-percentage', rfPercentage);
+        rfLabel.textContent = rfPercentage;
+
+        document.documentElement.style.setProperty('--decision-tree-percentage', dtPercentage);
+        dtLabel.textContent = dtPercentage;
+
+        document.documentElement.style.setProperty('--svm-percentage', svmPercentage);
+        svmLabel.textContent = svmPercentage;
+      };
+      updateGraph('58.6525%', '99.0526654821481%', '97.6668223005202%');
+    </script>
   </body>
 </html>
