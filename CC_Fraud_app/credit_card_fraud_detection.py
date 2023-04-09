@@ -2,10 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix,classification_report
-# from sklearn.metrics import recall_score, f1_score, precision_score
 from sklearn.svm import SVC
-import plotly.graph_objects as go
-from random import uniform
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 
@@ -128,35 +125,8 @@ class CCD_Fraud_Detection:
 
 # if __name__ == '__main__':
 
-#     # # Creating an instance of the class CCD_Fraud_Detection.
-#     CC = CCD_Fraud_Detection()
-#     print(CC.LogisticRegression_for_cc_fraud())
-#     print(CC.SVM_for_cc_fraud())
-#     print(CC.random_forest_for_cc_fraud())
-    # # Creating a gauge chart using plotly.
-    # fig = go.Figure(go.Indicator(
-    #     mode = "gauge+number",
-    #     value = float(CC.LogisticRegression_for_cc_fraud()),
-    #     domain = {'x': [0, 1], 'y': [0, 1]},
-    #     title = {'text': "Accuracy Using Logistic Regression"},
-    #     gauge = {'axis': { 'range': [None,100]}}))
-    # fig.show()
-
-
-    # # Creating a gauge chart using plotly.
-    # fig = go.Figure(go.Indicator(
-    #     mode = "gauge+number",
-    #     value = CC.random_forest_for_cc_fraud(),
-    #     domain = {'x': [0, 1], 'y': [0, 1]},
-    #     title = {'text': "Accuracy Using Random Forest Model"},
-    #     gauge = {'axis': { 'range': [None,100]}}))
-    # fig.show()
-
-    # Creating a gauge chart using plotly.
-    # fig = go.Figure(go.Indicator(
-    #     mode = "gauge+number",
-    #     value = CC.SVM_for_cc_fraud(),
-    #     domain = {'x': [0, 1], 'y': [0, 1]},
-    #     title = {'text': "Accuracy Using SVM Model"},
-    #     gauge = {'axis': { 'range': [None,100]}}))
-    # fig.show()
+# Creating an instance of the class CCD_Fraud_Detection.
+# CC = CCD_Fraud_Detection()
+# print(CC.LogisticRegression_for_cc_fraud("creditcard"))
+# print(CC.SVM_for_cc_fraud("creditcard"))
+# print(CC.random_forest_for_cc_fraud("creditcard"))
