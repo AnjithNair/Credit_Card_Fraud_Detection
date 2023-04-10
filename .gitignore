@@ -16376,3 +16376,15 @@
 .venv/Lib/site-packages/threadpoolctl-3.1.0.dist-info/METADATA
 .venv/Lib/site-packages/threadpoolctl-3.1.0.dist-info/RECORD
 .venv/Lib/site-packages/threadpoolctl-3.1.0.dist-info/WHEEL
+CC_Fraud_app/__pycache__/__init__.cpython-311.pyc
+CC_Fraud_app/__pycache__/admin.cpython-311.pyc
+CC_Fraud_app/__pycache__/apps.cpython-311.pyc
+CC_Fraud_app/__pycache__/credit_card_fraud_detection.cpython-311.pyc
+CC_Fraud_app/__pycache__/models.cpython-311.pyc
+CC_Fraud_app/__pycache__/urls.cpython-311.pyc
+CC_Fraud_app/__pycache__/views.cpython-311.pyc
+Credit_Card_Fraud_Detection/__pycache__/__init__.cpython-311.pyc
+Credit_Card_Fraud_Detection/__pycache__/settings.cpython-311.pyc
+Credit_Card_Fraud_Detection/__pycache__/urls.cpython-311.pyc
+Credit_Card_Fraud_Detection/__pycache__/wsgi.cpython-311.pyc
+CC_Fraud_app/migrations/__pycache__/__init__.cpython-311.pyc

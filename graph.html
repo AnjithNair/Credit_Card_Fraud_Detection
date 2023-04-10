@@ -16,8 +16,8 @@
       <p><b>Random forest</b></p>
 
       <div class="progress-bar">
-        <div class="bar" style="--width: var(--decision-tree-percentage, 0%);"></div>
-        <div class="label" id="decision-tree-label">0%</div>
+        <div class="bar" style="--width: var(--Logistic-Regression-percentage, 0%);"></div>
+        <div class="label" id="Logistic-Regression-label">0%</div>
       </div>
       <p><b>Decision tree</b></p>
 
@@ -33,7 +33,7 @@
       const rfLabel = document.getElementById('random-forest-label');
       rfLabel.textContent = rfLabel.previousElementSibling.style.getPropertyValue('--width');
 
-      const dtLabel = document.getElementById('decision-tree-label');
+      const lrLabel = document.getElementById('Logistic-Regression-label');
       dtLabel.textContent = dtLabel.previousElementSibling.style.getPropertyValue('--width');
 
       const svmLabel = document.getElementById('svm-label');
@@ -44,8 +44,8 @@
         document.documentElement.style.setProperty('--random-forest-percentage', rfPercentage);
         rfLabel.textContent = rfPercentage;
 
-        document.documentElement.style.setProperty('--decision-tree-percentage', dtPercentage);
-        dtLabel.textContent = dtPercentage;
+        document.documentElement.style.setProperty('--Logistic-Regression-percentage', lrPercentage);
+        lrLabel.textContent = lrPercentage;
 
         document.documentElement.style.setProperty('--svm-percentage', svmPercentage);
         svmLabel.textContent = svmPercentage;

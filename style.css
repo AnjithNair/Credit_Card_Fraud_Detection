@@ -1,52 +1,67 @@
-.gauge {
-    position: relative;
-    border-radius: 50%/100% 100% 0 0;
-    background-color: var(--color, #a22);
-    overflow: hidden;
-}
-.gauge:before{
-    content: "";
-    display: block;
-    padding-top: 50%;   /* ratio of 2:1*/
-}
-.gauge .chart {
-  overflow: hidden;
-}
-.gauge .mask {
-  position: absolute;
-  left: 20%;
-  right: 20%;
-  bottom: 0;
-  top: 40%;
-  background-color: #fff;
-  border-radius: 50%/100% 100% 0 0;
+*{
+  margin: 0;
+  padding: 0;
+  font-family: Century Georgia, 'Times New Roman', Times, serif;
 }
 
-.gauge .percentage {
-    position:  absolute;
-    top: -1px;
-    left: -1px;
-    bottom: 0;
-    right: -1px;
-    background-color: var(--background, #aaa);
-    transform:rotate(var(--rotation)); 
-    transform-origin: bottom center; 
-    transition-duration: 600;
+header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(card-image.jpg);
+  background-size: cover;
+  background-position: center;
 }
-.gauge:hover {
-  --rotation: 100deg;
-}
-.gauge .value {
-  position:absolute; bottom:0%; left:0;   
-  width:100%; 
+
+.hh {
+  color: rgb(250, 235, 240);
+  text-shadow: rgb(220, 243, 9);
+  margin: 60px;
+  padding: 8px;
+  transition: 3s;
   text-align: center;
+  font-size: 60px;
+  text-decoration-color: rgb(233, 57, 57);
 }
 
-.gauge .min {
-  position:absolute; 
-  bottom:0; left:5%;   
+#dropdown{
+  margin-top: 30px;
 }
-.gauge .max {
-  position:absolute; 
-  bottom:0; right:5%;   
- }
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+button {
+  background-color: #a38c97;
+  color: rgb(24, 23, 23);
+  font-size: 40px;
+  padding: 16px 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+select.h {
+  width: 350px;
+  padding: 18px;
+  font-size: 30px;
+  border: 3px solid #201f1f;
+  border-radius: 5px;
+  box-shadow: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 25 25' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M25.413 12.586L16 22l-9.413-9.414a2 2 0 0 1 2.828-2.828L16 16.172l6.586-6.586a2 2 0 0 1 2.827 2.828z' fill='%231D1D1B'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1px center;
+  background-size: 30px 30px;
+  background-color: #c3c2c5;
+}
+
+option {
+  color: #201f1f;
+  }

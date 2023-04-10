@@ -1,6 +1,7 @@
 from django.urls import path
-from . import views
+from .views import index, getdata
 
 urlpatterns = [
-	path('', views.getdata, name="api"),
+    path('', index, name='index'),
+    path('getdata', getdata, name='getdata'),
 ]

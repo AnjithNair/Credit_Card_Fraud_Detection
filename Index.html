@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title> Credit Card Fraud Detection</title>
+        <link rel="stylesheet" type="text/css" href="Style.css">
+    </head>
+    <body>
+        <header>
+            <h1 class="hh">CREDIT CARD FRAUD DETECTION USING ML&DL</h1>
+            
+            <div id="dropdown">
+                <select id="file_name" class="h">
+                    <option value="">Select the file name</option>
+                    <option value="creditcard">creditcard</option>
+                    <option value="Option 2">Option 2</option>
+                    <option value="Option 3">Option 3</option>
+                </select>
+            </div>
+            
+            <form>
+                <button type="button" onClick="getAccuracy();">GET ACCURACY</button>
+            </form>
+        </header>
+
+        <script>
+            function getAccuracy() {
+                var file_name = document.getElementById("file_name").value;
+                if (file_name == "") {
+                    alert("Please select a file name");
+                    return;
+                }
+                fetch("/getdata", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        file_name: file_name
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    var rf_acc = data["Accuracy of RandomForest"];
+                    var lr_acc = data["Accuracy of LogisticRegression"]; 
+                    var svm_acc = data["Accuracy of SVM Model"];
+                    var rf_percentage = rf_acc.toString() + '%';
+                    var lr_percentage = lr_acc.toString() + '%';
+                    var svm_percentage = svm_acc.toString() + '%';
+                });
+            }
+        </script>
+        
+    </body>
+</html>
