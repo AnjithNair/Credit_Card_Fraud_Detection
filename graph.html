@@ -10,47 +10,42 @@
       <h1 class="h">ACCURACY GRAPH FOR THE ALGORITHMS USED</h1>
 
       <div class="progress-bar">
-        <div class="bar" style="--width: var(--random-forest-percentage, 0%);"></div>
+        <div class="bar" style="width: var(--random-forest-percentage, 0%);"></div>
         <div class="label" id="random-forest-label">0%</div>
       </div>
       <p><b>Random forest</b></p>
 
       <div class="progress-bar">
-        <div class="bar" style="--width: var(--Logistic-Regression-percentage, 0%);"></div>
+        <div class="bar" style="width: var(--Logistic-Regression-percentage, 0%);"></div>
         <div class="label" id="Logistic-Regression-label">0%</div>
       </div>
-      <p><b>Decision tree</b></p>
+      <p><b>Logistic Regression</b></p>
 
       <div class="progress-bar">
-        <div class="bar" style="--width: var(--svm-percentage, 0%);"></div>
+        <div class="bar" style="width: var(--svm-percentage, 0%);"></div>
         <div class="label" id="svm-label">0%</div>
       </div>
       <p><b>Support vector machine</b></p>
     </header>
 
     <script>
-      // Get the labels and set their initial values
-      const rfLabel = document.getElementById('random-forest-label');
-      rfLabel.textContent = rfLabel.previousElementSibling.style.getPropertyValue('--width');
-
-      const lrLabel = document.getElementById('Logistic-Regression-label');
-      dtLabel.textContent = dtLabel.previousElementSibling.style.getPropertyValue('--width');
-
-      const svmLabel = document.getElementById('svm-label');
-      svmLabel.textContent = svmLabel.previousElementSibling.style.getPropertyValue('--width');
-
-      // Update the percentages and labels
-      const updateGraph = (rfPercentage, dtPercentage, svmPercentage) => {
-        document.documentElement.style.setProperty('--random-forest-percentage', rfPercentage);
-        rfLabel.textContent = rfPercentage;
-
-        document.documentElement.style.setProperty('--Logistic-Regression-percentage', lrPercentage);
-        lrLabel.textContent = lrPercentage;
-
-        document.documentElement.style.setProperty('--svm-percentage', svmPercentage);
-        svmLabel.textContent = svmPercentage;
+      const urlParams = new URLSearchParams(window.location.search);
+      const rfPercentage = urlParams.get('rf');
+      const lrPercentage = urlParams.get('lr');
+      const svmPercentage = urlParams.get('svm');
+      
+      const updateGraph = (rfPercentage, lrPercentage, svmPercentage) => {
+          document.documentElement.style.setProperty('--random-forest-percentage', rfPercentage);
+          document.getElementById('random-forest-label').textContent = rfPercentage;
+      
+          document.documentElement.style.setProperty('--Logistic-Regression-percentage', lrPercentage);
+          document.getElementById('Logistic-Regression-label').textContent = lrPercentage;
+      
+          document.documentElement.style.setProperty('--svm-percentage', svmPercentage);
+          document.getElementById('svm-label').textContent = svmPercentage;
       };
-      updateGraph('58.6525%', '99.0526654821481%', '97.6668223005202%');
-    </script>
+      
+      updateGraph(rfPercentage, lrPercentage, svmPercentage);
+      </script>
   </body>
 </html>

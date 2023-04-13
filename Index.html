@@ -31,7 +31,7 @@
                     alert("Please select a file name");
                     return;
                 }
-                fetch("/getdata", {
+                fetch("api/getdata", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -48,9 +48,13 @@
                     var rf_percentage = rf_acc.toString() + '%';
                     var lr_percentage = lr_acc.toString() + '%';
                     var svm_percentage = svm_acc.toString() + '%';
+            
+                    // pass the percentages to the updateGraph function in graph.html
+                    var graph_url = "/graph.html?" + "rf=" + rf_percentage + "&lr=" + lr_percentage + "&svm=" + svm_percentage;
+                    window.location.href = graph_url;
                 });
             }
-        </script>
+            </script>
         
     </body>
 </html>

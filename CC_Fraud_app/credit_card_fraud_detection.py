@@ -10,8 +10,11 @@ from sklearn.preprocessing import StandardScaler
 # Using Different Models For CCD Fraud Detection
 class CCD_Fraud_Detection:
 
+    def __init__(self,filepath):
+        self.filepath = filepath
+
     # Logistic Regression Model
-    def LogisticRegression_for_cc_fraud(self,filepath):
+    def LogisticRegression_for_cc_fraud(self):
         """Logistic Regression model to predict 
         the Accuracy of a given Supervised Data
         Args: 
@@ -19,7 +22,7 @@ class CCD_Fraud_Detection:
         Return: 
             None
         """
-        data = pd.read_csv(f"{filepath}.csv")
+        data = pd.read_csv(f"{self.filepath}.csv")
         
         legit = data[data.Class == 0]
         fraud = data[data.Class == 1]
@@ -50,14 +53,14 @@ class CCD_Fraud_Detection:
         model.fit(X_train,Y_train)
         
         # Accuracy score
-        X_train_pred = model.predict(X_train)
-        training_data_accuracy = accuracy_score(X_train_pred,Y_train)
+        X_train_pred = model.predict(X_test)
+        training_data_accuracy = accuracy_score(X_train_pred,Y_test)
         # print(f"Accuracy score on training data : {training_data_accuracy*100}")
         return training_data_accuracy*100
 
 
     # Random Forest Model
-    def random_forest_for_cc_fraud(self,filepath):
+    def random_forest_for_cc_fraud(self):
         """Random Forest Model for predicting fraud transactions in a given dataset
 
         Args:
@@ -66,7 +69,7 @@ class CCD_Fraud_Detection:
         Returns:
             float : Accuracy of the predictions
         """
-        data = pd.read_csv(f"{filepath}.csv")
+        data = pd.read_csv(f"{self.filepath}.csv")
 
         # Spliting the dataset into features and targets
         X = data.drop('Class',axis=1)
@@ -91,7 +94,7 @@ class CCD_Fraud_Detection:
 
 
     # Support Vector Machine(SVM) Model
-    def SVM_for_cc_fraud(self,filepath):
+    def SVM_for_cc_fraud(self):
         """Support Vector Machine(SVM) Model for predicting fraud transaction in a given dataset
 
         Args:
@@ -100,7 +103,7 @@ class CCD_Fraud_Detection:
         Returns:
             float : Accuracy of the predictions
         """
-        data = pd.read_csv(f"{filepath}.csv")
+        data = pd.read_csv(f"{self.filepath}.csv")
 
         legit = data[data.Class == 0]
         fraud = data[data.Class == 1]
@@ -121,12 +124,3 @@ class CCD_Fraud_Detection:
         training_data_accuracy = accuracy_score(X_pred,Y_test)
         
         return training_data_accuracy*100
-
-
-# if __name__ == '__main__':
-
-# Creating an instance of the class CCD_Fraud_Detection.
-# CC = CCD_Fraud_Detection()
-# print(CC.LogisticRegression_for_cc_fraud("creditcard"))
-# print(CC.SVM_for_cc_fraud("creditcard"))
-# print(CC.random_forest_for_cc_fraud("creditcard"))
