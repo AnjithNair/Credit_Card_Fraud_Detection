@@ -1,15 +1,25 @@
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from .credit_card_fraud_detection import CCD_Fraud_Detection
 from rest_framework.response import Response
-# pip  install -r requirmets.txt
 
 
 def index(request):
     return render(request, 'Index.html')
 
 def graph(request):
-    return render(request, 'graph.html')
+    rf = request.GET.get('rf', None)
+    lr = request.GET.get('lr', None)
+    svm = request.GET.get('svm', None)
+
+    context = {
+        'rf': rf,
+        'lr': lr,
+        'svm': svm,
+    }
+
+    return render(request, 'graph.html', context)
 
 
 @api_view(['POST'])

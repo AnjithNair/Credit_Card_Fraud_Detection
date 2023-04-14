@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title> Credit Card Fraud Detection</title>
-        <link rel="stylesheet" type="text/css" href="Style.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'Style.css' %}">
     </head>
     <body>
         <header>
@@ -23,18 +24,37 @@
                 <button type="button" onClick="getAccuracy();">GET ACCURACY</button>
             </form>
         </header>
-
+        <div id="loading" style="display: none;">
+            <h2>Model is being trained and accuracy is being generated. Please be patient...</h2>
+        </div>
         <script>
+            function getCsrfToken() {
+              var cookieValue = null;
+              var name = 'csrftoken';
+              if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                  var cookie = cookies[i].trim();
+                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                  }
+                }
+              }
+              return cookieValue;
+            }
             function getAccuracy() {
                 var file_name = document.getElementById("file_name").value;
                 if (file_name == "") {
                     alert("Please select a file name");
                     return;
                 }
-                fetch("api/getdata", {
+
+                fetch("/getdata/", {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCsrfToken()
                     },
                     body: JSON.stringify({
                         file_name: file_name
@@ -48,13 +68,22 @@
                     var rf_percentage = rf_acc.toString() + '%';
                     var lr_percentage = lr_acc.toString() + '%';
                     var svm_percentage = svm_acc.toString() + '%';
-            
+
                     // pass the percentages to the updateGraph function in graph.html
                     var graph_url = "/graph.html?" + "rf=" + rf_percentage + "&lr=" + lr_percentage + "&svm=" + svm_percentage;
                     window.location.href = graph_url;
                 });
             }
-            </script>
-        
+
+            document.addEventListener('DOMContentLoaded', function() {
+                var getAccuracyButton = document.querySelector("button[type='button']");
+                var loadingDiv = document.getElementById("loading");
+
+                getAccuracyButton.addEventListener('click', function() {
+                    loadingDiv.style.display = "block";
+                    getAccuracy();
+                });
+            });
+        </script>
     </body>
 </html>

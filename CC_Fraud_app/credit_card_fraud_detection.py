@@ -115,11 +115,16 @@ class CCD_Fraud_Detection:
         # Split the dataset into training data and test data
         X_train,X_test,Y_train,Y_test = train_test_split(X,Y,test_size=0.2,random_state=42)
 
+        # Scale the features before fitting the SVM model
+        scaler = StandardScaler()
+        X_train_scaled = scaler.fit_transform(X_train)
+        X_test_scaled = scaler.transform(X_test)
+
         SVM = SVC()
-        SVM.fit(X_train,Y_train)
+        SVM.fit(X_train_scaled,Y_train)
 
         # Predicting the values of the training data.
-        X_pred = SVM.predict(X_test)
+        X_pred = SVM.predict(X_test_scaled)
         # Calculating the accuracy of the model on the training data.
         training_data_accuracy = accuracy_score(X_pred,Y_test)
         

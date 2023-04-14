@@ -2,7 +2,8 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="graph_style.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'graph_style.css' %}">
     <title>ACCURACY GRAPH FOR THE ALGORITHMS USED</title>
   </head>
   <body>
@@ -46,6 +47,6 @@
       };
       
       updateGraph(rfPercentage, lrPercentage, svmPercentage);
-      </script>
+    </script>
   </body>
 </html>
