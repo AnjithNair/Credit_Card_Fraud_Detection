@@ -1,4 +1,6 @@
 import pandas as pd
+import os
+import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix,classification_report
@@ -12,7 +14,27 @@ class CCD_Fraud_Detection:
 
     def __init__(self,filepath):
         self.filepath = filepath
+        self.model_folder = "saved_models"
 
+
+    def save_model(self, model, model_name):
+        # Create the model folder if it does not exist
+        if not os.path.exists(self.model_folder):
+            os.makedirs(self.model_folder)
+
+        with open(f"{self.model_folder}/{model_name}.pkl", 'wb') as file:
+            pickle.dump(model, file)
+
+
+    def load_model(self, model_name):
+        try:
+            with open(f"{self.model_folder}/{model_name}.pkl", 'rb') as file:
+                model = pickle.load(file)
+                return model
+        except FileNotFoundError:
+            return None
+        
+    
     # Logistic Regression Model
     def LogisticRegression_for_cc_fraud(self):
         """Logistic Regression model to predict 
@@ -46,17 +68,31 @@ class CCD_Fraud_Detection:
         # Split the dataset into training data and test data
         X_train,X_test,Y_train,Y_test = train_test_split(X,Y,test_size=0.2,stratify=Y,random_state=24)
         
-        # Creating Logistic Regression Model object.
-        model = LogisticRegression()
+        # Scale the features before fitting the logistic regression model
+        scaler = StandardScaler()
+        X_train_scaled = scaler.fit_transform(X_train)
+        X_test_scaled = scaler.transform(X_test)
         
-        # Fitting the model to the training data.
-        model.fit(X_train,Y_train)
-        
-        # Accuracy score
-        X_train_pred = model.predict(X_test)
-        training_data_accuracy = accuracy_score(X_train_pred,Y_test)
-        # print(f"Accuracy score on training data : {training_data_accuracy*100}")
-        return training_data_accuracy*100
+        model = self.load_model("logistic_regression")
+        if model is not None:
+            # Accuracy score
+            X_train_pred = model.predict(X_test_scaled)
+            training_data_accuracy = accuracy_score(X_train_pred,Y_test)
+            # print(f"Accuracy score on training data : {training_data_accuracy*100}")
+            return training_data_accuracy*100
+        else:
+            # Creating Logistic Regression Model object with an increased max_iter value
+            model = LogisticRegression(max_iter=1000)
+
+            # Fitting the model to the scaled training data.
+            model.fit(X_train_scaled, Y_train)
+            self.save_model(model, "logistic_regression")
+
+            # Accuracy score
+            X_train_pred = model.predict(X_test_scaled)
+            training_data_accuracy = accuracy_score(X_train_pred,Y_test)
+            # print(f"Accuracy score on training data : {training_data_accuracy*100}")
+            return training_data_accuracy*100
 
 
     # Random Forest Model
@@ -78,19 +114,29 @@ class CCD_Fraud_Detection:
         # Split the dataset into training data and test data
         X_train,X_test,Y_train,Y_test = train_test_split(X,Y,test_size=0.2,random_state=42)
 
-        # Create a random forest classifier object
-        rfc = RandomForestClassifier(n_estimators=50)  # n_estimators : The number of trees in the forest
+        model = self.load_model("random_forest")
+        if model is not None:
+            # Predict the test data using the trained model
+            y_pred = model.predict(X_test)
 
-        # Train the model on the training data
-        rfc.fit(X_train, Y_train)
+            # Calculate the accuracy of the model
+            accuracy = accuracy_score(Y_test, y_pred)
+            return accuracy*100
 
-        # Predict the test data using the trained model
-        y_pred = rfc.predict(X_test)
+        else:
+            # Create a random forest classifier object
+            model = RandomForestClassifier(n_estimators=50)  # n_estimators : The number of trees in the forest
 
-        # Calculate the accuracy of the model
-        accuracy = accuracy_score(Y_test, y_pred)
+            # Train the model on the training data
+            model.fit(X_train, Y_train)
+            self.save_model(model,"random_forest")
+            # Predict the test data using the trained model
+            y_pred = model.predict(X_test)
 
-        return accuracy*100
+            # Calculate the accuracy of the model
+            accuracy = accuracy_score(Y_test, y_pred)
+
+            return accuracy*100
 
 
     # Support Vector Machine(SVM) Model
@@ -120,12 +166,20 @@ class CCD_Fraud_Detection:
         X_train_scaled = scaler.fit_transform(X_train)
         X_test_scaled = scaler.transform(X_test)
 
-        SVM = SVC()
-        SVM.fit(X_train_scaled,Y_train)
+        SVM = self.load_model("support_vector_machines")
+        if SVM is not None:
+            X_pred = SVM.predict(X_test_scaled)
+            training_data_accuracy = accuracy_score(X_pred, Y_test)
+            return training_data_accuracy*100
+        else:    
+            SVM = SVC()
+            SVM.fit(X_train_scaled,Y_train)
 
-        # Predicting the values of the training data.
-        X_pred = SVM.predict(X_test_scaled)
-        # Calculating the accuracy of the model on the training data.
-        training_data_accuracy = accuracy_score(X_pred,Y_test)
-        
-        return training_data_accuracy*100
+            self.save_model(SVM,"support_vector_machines")
+            
+            # Predicting the values of the training data.
+            X_pred = SVM.predict(X_test_scaled)
+            # Calculating the accuracy of the model on the training data.
+            training_data_accuracy = accuracy_score(X_pred,Y_test)
+            
+            return training_data_accuracy*100
