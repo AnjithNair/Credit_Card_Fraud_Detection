@@ -3,7 +3,7 @@ import os
 import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, confusion_matrix,classification_report
+from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
@@ -45,7 +45,8 @@ class CCD_Fraud_Detection:
             None
         """
         data = pd.read_csv(f"{self.filepath}.csv")
-        
+        X_original = data.drop(columns='Class',axis =1)
+        Y_original = data['Class']
         legit = data[data.Class == 0]
         fraud = data[data.Class == 1]
         
@@ -66,7 +67,8 @@ class CCD_Fraud_Detection:
         Y = new_dataset['Class']
         
         # Split the dataset into training data and test data
-        X_train,X_test,Y_train,Y_test = train_test_split(X,Y,test_size=0.2,stratify=Y,random_state=24)
+        X_train,_,Y_train,_ = train_test_split(X,Y,test_size=0.2,stratify=Y,random_state=24)
+        _,X_test,_,Y_test =  train_test_split(X_original,Y_original,test_size=0.2,stratify=Y_original,random_state=24)
         
         # Scale the features before fitting the logistic regression model
         scaler = StandardScaler()
@@ -77,9 +79,9 @@ class CCD_Fraud_Detection:
         if model is not None:
             # Accuracy score
             X_train_pred = model.predict(X_test_scaled)
-            training_data_accuracy = accuracy_score(X_train_pred,Y_test)
+            training_data_accuracy = accuracy_score(Y_test, X_train_pred)
             # print(f"Accuracy score on training data : {training_data_accuracy*100}")
-            return training_data_accuracy*100
+            return training_data_accuracy*100, confusion_matrix(Y_test,X_train_pred)
         else:
             # Creating Logistic Regression Model object with an increased max_iter value
             model = LogisticRegression(max_iter=1000)
@@ -90,9 +92,9 @@ class CCD_Fraud_Detection:
 
             # Accuracy score
             X_train_pred = model.predict(X_test_scaled)
-            training_data_accuracy = accuracy_score(X_train_pred,Y_test)
+            training_data_accuracy = accuracy_score(Y_test,X_train_pred)
             # print(f"Accuracy score on training data : {training_data_accuracy*100}")
-            return training_data_accuracy*100
+            return (training_data_accuracy*100), confusion_matrix(Y_test,X_train_pred)
 
 
     # Random Forest Model
@@ -121,7 +123,7 @@ class CCD_Fraud_Detection:
 
             # Calculate the accuracy of the model
             accuracy = accuracy_score(Y_test, y_pred)
-            return accuracy*100
+            return accuracy*100,confusion_matrix(Y_test, y_pred)
 
         else:
             # Create a random forest classifier object
@@ -136,7 +138,7 @@ class CCD_Fraud_Detection:
             # Calculate the accuracy of the model
             accuracy = accuracy_score(Y_test, y_pred)
 
-            return accuracy*100
+            return accuracy*100,confusion_matrix(Y_test, y_pred)
 
 
     # Support Vector Machine(SVM) Model
@@ -169,8 +171,8 @@ class CCD_Fraud_Detection:
         SVM = self.load_model("support_vector_machines")
         if SVM is not None:
             X_pred = SVM.predict(X_test_scaled)
-            training_data_accuracy = accuracy_score(X_pred, Y_test)
-            return training_data_accuracy*100
+            training_data_accuracy = accuracy_score(Y_test, X_pred)
+            return training_data_accuracy*100,confusion_matrix(Y_test, X_pred)
         else:    
             SVM = SVC()
             SVM.fit(X_train_scaled,Y_train)
@@ -180,6 +182,6 @@ class CCD_Fraud_Detection:
             # Predicting the values of the training data.
             X_pred = SVM.predict(X_test_scaled)
             # Calculating the accuracy of the model on the training data.
-            training_data_accuracy = accuracy_score(X_pred,Y_test)
+            training_data_accuracy = accuracy_score(Y_test,X_pred)
             
-            return training_data_accuracy*100
+            return training_data_accuracy*100,confusion_matrix(Y_test, X_pred)

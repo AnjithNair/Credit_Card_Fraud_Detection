@@ -27,9 +27,20 @@
         <div class="label" id="svm-label">0%</div>
       </div>
       <p><b>Support vector machine</b></p>
+
+      <form>
+        <button type="button" onClick="getCm();">SHOW MATRIX</button>
+    </form>
     </header>
 
     <script>
+      function getCm() {
+      // code to generate and display confusion matrix goes here
+        
+      // navigate to confusionmatrix.html
+      window.location.href = "confusionmatrix.html";
+      }
+
       const urlParams = new URLSearchParams(window.location.search);
       const rfPercentage = urlParams.get('rf');
       const lrPercentage = urlParams.get('lr');

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>project</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-image: linear-gradient(rgba(82, 43, 43, 0.5),rgba(69, 109, 132, 0.5));
+    }
+
+    table {
+      text-align: center;
+    }
+
+    #aa {
+      display: block;
+      text-align: left;
+      font-weight: bold;
+      font-size: 24px;
+      padding: 50px;
+    }
+  </style>
+  <h1>CONFUSION MATRIX</h1>
+  <p>
+    <b>
+    TP - True Positive  - i.e, Detected True and Actually True<br>
+    FP - False Positive - i.e, Detected True and Actually False<br>
+    FN - False Negative - i.e, Detected False and Actually True<br>
+    TN - True Negative - i.e, Detected False and Actually False
+  </b>
+  </p>
+</head>
+
+<body>
+  
+  <h2><pre>       TP                         FP</pre></h2>
+  <table border="1" cellspacing="0" cellpadding="50" width="500" heigth="700">
+    <tr>
+
+    </tr>
+
+
+    <tr>
+      <td bgcolor="Green"> 55822</td>
+      <td bgcolor="red"> 1042</td>
+    </tr>
+    <tr>
+      <td bgcolor="red"> 10</td>
+      <td bgcolor="Green">88</td>
+    </tr>
+
+  </table>
+  <h2><pre>      FN                         TN</pre></h2>
+  <a id="aa">Values Detected Using LogisticRegression</a>
+  
+  <h2><pre>      TP                         FP</pre></h2>
+  <table border="1" cellspacing="0" cellpadding="50" width="500" heigth="700">
+    <tr>
+
+    </tr>
+
+
+    <tr>
+      <td bgcolor="Green"> 56862</td>
+      <td bgcolor="red"> 2</td>
+    </tr>
+    <tr>
+      <td bgcolor="red"> 37</td>
+      <td bgcolor="Green">61</td>
+    </tr>
+
+  </table>
+  <h2><pre>      FN                         TN</pre></h2>
+  <a id="aa">Values Detected Using SVM</a>
+  
+  <h2><pre>      TP                         FP</pre></h2>
+  <table border="1" cellspacing="0" cellpadding="50" width="500" heigth="700">
+    <tr>
+
+    </tr>
+
+
+    <tr>
+      <td bgcolor="Green"> 56862</td>
+      <td bgcolor="red"> 2</td>
+    </tr>
+    <tr>
+      <td bgcolor="red"> 21</td>
+      <td bgcolor="Green">77</td>
+    </tr>
+
+  </table>
+  <h2><pre>      FN                         TN</pre></h2>
+  <a id="aa">Values Detected Using Random Forest</a>
+</body>
+
+</html>
