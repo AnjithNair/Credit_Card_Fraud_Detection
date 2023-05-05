@@ -45,12 +45,12 @@
 
 
     <tr>
-      <td bgcolor="Green"> 55822</td>
-      <td bgcolor="red"> 1042</td>
+      <td bgcolor="Green" id="lr_tp"> 55822</td>
+      <td bgcolor="red" id="lr_fp"> 1042</td>
     </tr>
     <tr>
-      <td bgcolor="red"> 10</td>
-      <td bgcolor="Green">88</td>
+      <td bgcolor="red" id="lr_fn"> 10</td>
+      <td bgcolor="Green" id="lr_tn">88</td>
     </tr>
 
   </table>
@@ -65,12 +65,12 @@
 
 
     <tr>
-      <td bgcolor="Green"> 56862</td>
-      <td bgcolor="red"> 2</td>
+      <td bgcolor="Green" id="svm_tp"> 56862</td>
+      <td bgcolor="red" id="svm_fp"> 2</td>
     </tr>
     <tr>
-      <td bgcolor="red"> 37</td>
-      <td bgcolor="Green">61</td>
+      <td bgcolor="red" id="svm_fn"> 37</td>
+      <td bgcolor="Green" id="svm_tn">61</td>
     </tr>
 
   </table>
@@ -85,17 +85,59 @@
 
 
     <tr>
-      <td bgcolor="Green"> 56862</td>
-      <td bgcolor="red"> 2</td>
+      <td bgcolor="Green" id="rf_tp"> 56862</td>
+      <td bgcolor="red" id="rf_fp"> 2</td>
     </tr>
     <tr>
-      <td bgcolor="red"> 21</td>
-      <td bgcolor="Green">77</td>
+      <td bgcolor="red" id="rf_fn"> 21</td>
+      <td bgcolor="Green" id="rf_tn">77</td>
     </tr>
 
   </table>
   <h2><pre>      FN                         TN</pre></h2>
   <a id="aa">Values Detected Using Random Forest</a>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const lr_tp = urlParams.get('lr_tp');
+    const lr_fp = urlParams.get('lr_fp');
+    const lr_fn = urlParams.get('lr_fn');
+    const lr_tn = urlParams.get('lr_tn');
+  
+    const rf_tp = urlParams.get('rf_tp');
+    const rf_fp = urlParams.get('rf_fp');
+    const rf_fn = urlParams.get('rf_fn');
+    const rf_tn = urlParams.get('rf_tn');
+  
+    const svm_tp = urlParams.get('svm_tp');
+    const svm_fp = urlParams.get('svm_fp');
+    const svm_fn = urlParams.get('svm_fn');
+    const svm_tn = urlParams.get('svm_tn');
+  
+    console.log(lr_tp, lr_fp, lr_fn, lr_tn); 
+  
+    const updateConfusionMatrix = (lr_tp,lr_fp,lr_fn,lr_tn,rf_tp,rf_fp,rf_fn,rf_tn,svm_tp,svm_fp,svm_fn,svm_tn) =>{
+   
+      document.getElementById("lr_tp").innerHTML = lr_tp;
+      document.getElementById("lr_fp").innerHTML = lr_fp;
+      document.getElementById("lr_fn").innerHTML = lr_fn;
+      document.getElementById("lr_tn").innerHTML = lr_tn;
+  
+      document.getElementById("rf_tp").innerHTML = rf_tp;
+      document.getElementById("rf_fp").innerHTML = rf_fp;
+      document.getElementById("rf_fn").innerHTML = rf_fn;
+      document.getElementById("rf_tn").innerHTML = rf_tn;
+  
+      document.getElementById("svm_tp").innerHTML = svm_tp;
+      document.getElementById("svm_fp").innerHTML = svm_fp;
+      document.getElementById("svm_fn").innerHTML = svm_fn;
+      document.getElementById("svm_tn").innerHTML = svm_tn;
+      console.log(lr_tp, lr_fp, lr_fn, lr_tn, rf_tp, rf_fp, rf_fn, rf_tn, svm_tp, svm_fp, svm_fn, svm_tn); // add this line to check if the values are being updated correctly
+  }
+  
+    updateConfusionMatrix(lr_tp,lr_fp,lr_fn,lr_tn,rf_tp,rf_fp,rf_fn,rf_tn,svm_tp,svm_fp,svm_fn,svm_tn);
+  </script>
 </body>
+
 
 </html>

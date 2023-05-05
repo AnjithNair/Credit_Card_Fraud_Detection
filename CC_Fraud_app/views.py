@@ -8,7 +8,27 @@ from rest_framework.response import Response
 def index(request):
     return render(request, 'Index.html')
 
+from django.shortcuts import redirect, reverse
+
 def graph(request):
+    if request.method == 'POST':
+        rf = request.POST.get('rf')
+        lr = request.POST.get('lr')
+        svm = request.POST.get('svm')
+        lr_cm = request.POST.get('lr_cm')
+        rf_cm = request.POST.get('rf_cm')
+        svm_cm = request.POST.get('svm_cm')
+        
+        context = {
+            'rf': rf,
+            'lr': lr,
+            'svm': svm,
+        }
+
+        return redirect(reverse('confusionmatrix') + f'?rf={rf}&lr={lr}&svm={svm}&lr_cm[0]={lr_cm[0]}&lr_cm[1]={lr_cm[1]}&lr_cm[2]={lr_cm[2]}&lr_cm[3]={lr_cm[3]}&rf_cm[0]={rf_cm[0]}&rf_cm[1]={rf_cm[1]}&rf_cm[2]={rf_cm[2]}&rf_cm[3]={rf_cm[3]}&svm_cm[0]={svm_cm[0]}&svm_cm[1]={svm_cm[1]}&svm_cm[2]={svm_cm[2]}&svm_cm[3]={svm_cm[3]}')
+
+
+
     rf = request.GET.get('rf', None)
     lr = request.GET.get('lr', None)
     svm = request.GET.get('svm', None)
@@ -21,18 +41,23 @@ def graph(request):
 
     return render(request, 'graph.html', context)
 
+
+
 def confusionmatrix(request):
-    rf_cm = request.GET.getlist('rf_cm[]', [])
-    lr_cm = request.GET.getlist('lr_cm[]', [])
-    svm_cm = request.GET.getlist('svm_cm[]', [])
+    lr_cm = [int(request.GET.get('lr_cm[0]', 0)), int(request.GET.get('lr_cm[1]', 0)), int(request.GET.get('lr_cm[2]', 0)), int(request.GET.get('lr_cm[3]', 0))]
+    rf_cm = [int(request.GET.get('rf_cm[0]', 0)), int(request.GET.get('rf_cm[1]', 0)), int(request.GET.get('rf_cm[2]', 0)), int(request.GET.get('rf_cm[3]', 0))]
+    svm_cm = [int(request.GET.get('svm_cm[0]', 0)), int(request.GET.get('svm_cm[1]', 0)), int(request.GET.get('svm_cm[2]', 0)), int(request.GET.get('svm_cm[3]', 0))]
 
     context = {
-        'rf_cm': [int(x) for x in rf_cm],
-        'lr_cm': [int(x) for x in lr_cm],
-        'svm_cm': [int(x) for x in svm_cm],
+        'lr_cm': lr_cm,
+        'rf_cm': rf_cm,
+        'svm_cm': svm_cm,
     }
 
     return render(request, 'confusionmatrix.html', context)
+
+
+
 
 @api_view(['POST'])
 def getdata(request):

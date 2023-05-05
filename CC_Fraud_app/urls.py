@@ -6,6 +6,6 @@ urlpatterns = [
     path('getdata/', getdata, name='getdata'),
     path('graph/', graph, name='graph'),
     path('graph.html', views.graph, name='graph'),
-    path('confusionmatrix/',confusionmatrix,name='confusionmatrix'),
+    path('confusionmatrix/',views.confusionmatrix,name='confusionmatrix'),
     path('confusionmatrix.html', views.confusionmatrix, name='confusionmatrix')
 ]

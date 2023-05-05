@@ -28,19 +28,67 @@
       </div>
       <p><b>Support vector machine</b></p>
 
-      <form>
-        <button type="button" onClick="getCm();">SHOW MATRIX</button>
+      <form method="post" action="{% url 'confusionmatrix' %}">
+
+        {% csrf_token %}
+        <input type="hidden" name="lr_cm[0]" value="{{ lr_cm.0 }}">
+        <input type="hidden" name="lr_cm[1]" value="{{ lr_cm.1 }}">
+        <input type="hidden" name="lr_cm[2]" value="{{ lr_cm.2 }}">
+        <input type="hidden" name="lr_cm[3]" value="{{ lr_cm.3 }}">
+        <input type="hidden" name="rf_cm[0]" value="{{ rf_cm.0 }}">
+        <input type="hidden" name="rf_cm[1]" value="{{ rf_cm.1 }}">
+        <input type="hidden" name="rf_cm[2]" value="{{ rf_cm.2 }}">
+        <input type="hidden" name="rf_cm[3]" value="{{ rf_cm.3 }}">
+        <input type="hidden" name="svm_cm[0]" value="{{ svm_cm.0 }}">
+        <input type="hidden" name="svm_cm[1]" value="{{ svm_cm.1 }}">
+        <input type="hidden" name="svm_cm[2]" value="{{ svm_cm.2 }}">
+        <input type="hidden" name="svm_cm[3]" value="{{ svm_cm.3 }}">
+        <button id="prediction-button" type="submit" onClick="getCm()" style="background-color: #3a4939; color: rgb(255, 255, 255); padding: 14px 20px; border: none; border-radius: 3px; cursor: pointer; font-size: 16px;">SHOW PREDICTION</button>
     </form>
     </header>
 
     <script>
-      function getCm() {
-      // code to generate and display confusion matrix goes here
-        
-      // navigate to confusionmatrix.html
-      window.location.href = "confusionmatrix.html";
-      }
+      function getCsrfToken() {
+    const cookieValue = document.cookie.match(/csrftoken=([^;]+)/)[1];
+    return cookieValue;
+}
 
+      document.getElementById("prediction-button").addEventListener("click", getCm);
+      function getCm() {
+    const file_name = document.getElementById('file_name').value;
+
+    fetch("/getdata/", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCsrfToken()
+        },
+        body: JSON.stringify({
+            file_name: file_name
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        var confusion_matrix_url = "/confusionmatrix?" +
+            "lr_tp=" + data["CM of LogisticRegression-TP"] +
+            "&lr_fp=" + data["CM of LogisticRegression-FP"] +
+            "&lr_fn=" + data["CM of LogisticRegression-FN"] +
+            "&lr_tn=" + data["CM of LogisticRegression-TN"] +
+            "&rf_tp=" + data["CM of RandomForest - TP "] +
+            "&rf_fp=" + data["CM of RandomForest - FP "] +
+            "&rf_fn=" + data["CM of RandomForest - FN "] +
+            "&rf_tn=" + data["CM of RandomForest - TN "] +
+            "&svm_tp=" + data["CM of SVM Model - TP"] +
+            "&svm_fp=" + data["CM of SVM Model - FP"] +
+            "&svm_fn=" + data["CM of SVM Model - FN"] +
+            "&svm_tn=" + data["CM of SVM Model - TN"];
+
+        // navigate to confusionmatrix.html
+        window.location.href = confusion_matrix_url;
+    })
+}
+
+      
       const urlParams = new URLSearchParams(window.location.search);
       const rfPercentage = urlParams.get('rf');
       const lrPercentage = urlParams.get('lr');
@@ -59,5 +107,6 @@
       
       updateGraph(rfPercentage, lrPercentage, svmPercentage);
     </script>
+      
   </body>
 </html>
