@@ -99,6 +99,12 @@
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
+  
+    const getIntParam = (name) => {
+      const value = urlParams.get(name);
+      return value !== null ? parseInt(value, 10) : null;
+    };
+  
     const lr_tp = urlParams.get('lr_tp');
     const lr_fp = urlParams.get('lr_fp');
     const lr_fn = urlParams.get('lr_fn');
@@ -114,10 +120,20 @@
     const svm_fn = urlParams.get('svm_fn');
     const svm_tn = urlParams.get('svm_tn');
   
-    console.log(lr_tp, lr_fp, lr_fn, lr_tn); 
-  
-    const updateConfusionMatrix = (lr_tp,lr_fp,lr_fn,lr_tn,rf_tp,rf_fp,rf_fn,rf_tn,svm_tp,svm_fp,svm_fn,svm_tn) =>{
-   
+    const updateConfusionMatrix = (
+    lr_tp, lr_fp, lr_fn, lr_tn,
+    rf_tp, rf_fp, rf_fn, rf_tn,
+    svm_tp, svm_fp, svm_fn, svm_tn
+  ) => {
+    if (
+      lr_tp === null || lr_fp === null || lr_fn === null || lr_tn === null ||
+      rf_tp === null || rf_fp === null || rf_fn === null || rf_tn === null ||
+      svm_tp === null || svm_fp === null || svm_fn === null || svm_tn === null
+    ) {
+      console.error('Some URL parameter values are missing or incorrect.');
+      return;
+    }
+     
       document.getElementById("lr_tp").innerHTML = lr_tp;
       document.getElementById("lr_fp").innerHTML = lr_fp;
       document.getElementById("lr_fn").innerHTML = lr_fn;
