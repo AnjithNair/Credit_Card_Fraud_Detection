@@ -16389,3 +16389,9 @@ Credit_Card_Fraud_Detection/__pycache__/urls.cpython-311.pyc
 Credit_Card_Fraud_Detection/__pycache__/wsgi.cpython-311.pyc
 CC_Fraud_app/migrations/__pycache__/__init__.cpython-311.pyc
 .ipynb_checkpoints/Untitled-checkpoint.ipynb
+.vscode/settings.json
+db.sqlite3
+CC_Fraud_app/__pycache__/serializer.cpython-311.pyc
+CC_Fraud_app/migrations/__pycache__/0001_initial.cpython-311.pyc
+CC_Fraud_app/migrations/__pycache__/0002_alter_accuracies_logisticregression_and_more.cpython-311.pyc
+db.sqlite3
